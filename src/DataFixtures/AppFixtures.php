@@ -43,7 +43,7 @@ class AppFixtures extends Fixture
     $this->manager->flush();
   }
 
-  public function loadCategories($count = self::DEFAULT_FIXTURES_COUNT)
+  private function loadCategories($count = self::DEFAULT_FIXTURES_COUNT)
   {
     for($i = 0; $i < $count; $i++) {
       $category = new Category;
@@ -56,7 +56,7 @@ class AppFixtures extends Fixture
     }
   }
 
-  public function loadUsers($count = self::DEFAULT_FIXTURES_COUNT)
+  private function loadUsers($count = self::DEFAULT_FIXTURES_COUNT)
   {
     for($i = 0; $i < $count; $i++) {
       $user = new User;
@@ -73,7 +73,7 @@ class AppFixtures extends Fixture
     }
   }
 
-  public function loadPosts($count = self::DEFAULT_FIXTURES_COUNT)
+  private function loadPosts($count = self::DEFAULT_FIXTURES_COUNT)
   {
     for($i = 0; $i < $count; $i++) {
       $post = new Post;
@@ -83,22 +83,14 @@ class AppFixtures extends Fixture
       $post->setImage('img_' . $i . '.jpg');
       $post->setViews($this->faker->numberBetween(0, 1500));
 
-      $randomCategoryKey = $this->getRandomKey($this->referenceCategories);
-      $randomCategoryTitle = $this->referenceCategories[$randomCategoryKey];  // is existing random category title
-      $post->setCategory($this->getReference($randomCategoryTitle));
+      $randomCategory = $this->faker->randomElement($this->referenceCategories);
+      $post->setCategory($this->getReference($randomCategory));
 
-      $randomUserKey = $this->getRandomKey($this->referenceUsers);
-      $randomUserName = $this->referenceUsers[$randomUserKey];  //is exitsting random user name
-      $post->setUser($this->getReference($randomUserName));
+      $randomUser = $this->faker->randomElement($this->referenceUsers);
+      $post->setUser($this->getReference($randomUser));
 
       $this->manager->persist($post);
     }
-  }
-
-
-  private function getRandomKey(Array $array)
-  {
-    return $this->faker->numberBetween(0, count($array) - 1);
   }
 
 }
