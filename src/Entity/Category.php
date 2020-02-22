@@ -21,6 +21,15 @@ class Category
      */
     private $title;
 
+    /**
+     * @ORM\OneToMany(
+     * targetEntity="Post",
+     * mappedBy="category",
+     * orphanRemoval=true
+     *)
+     */
+    private $posts;
+
     public function getId(): ?int
     {
         return $this->id;
