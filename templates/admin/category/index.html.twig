@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Category{% endblock %}
+
+{% block body %}
+  <a href="{{path('admin_category_new')}}" class="btn btn-primary my-4">Add new category</a>
+  <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">title</th>
+      <th scope="col">action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for category in categories %}
+    <tr>
+      <th scope="row">{{category.id}}</th>
+      <td>{{category.title}}</td>
+      <td>
+        <a href="{{path('admin_category_edit', {id: category.id})}}" class="btn btn-secondary btn-sm">edit</a>
+        <a class="btn btn-sm py-0 px-0">
+        {{ include('admin/form/_delete_form.html.twig', {category: category}) }} </a>
+      </td>
+    </th>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

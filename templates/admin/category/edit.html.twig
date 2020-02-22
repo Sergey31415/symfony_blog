@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Edit category {% endblock %}
+
+{% block body %}
+  {{ form_start(form) }}
+    {{ form_row(form.title) }}
+    <button type="submit" class="btn btn-primary">Edit category</button>
+  {{ form_end(form) }}
+{% endblock %}

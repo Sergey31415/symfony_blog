@@ -1,12 +1,40 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+  <head>
+      <meta charset="UTF-8">
+      <title>Symfony Blog</title>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+      {% block stylesheets %}{% endblock %}
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <ul class="nav navbar-nav mr-auto">
+          <li class="nav-item">
+           <a href="#"> <img src="{{asset('build/images/blog.png')}}" width="100"> </a> </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Home</a> </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About Me</a> </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contacts</a> </li>
+        </ul>
+        <ul class="nav navbar-nav pull-right">
+          <li class="nav-item"><a class="nav-link" href="#">Register</a></li>
+          <li class="nav-item"><a class="nav-link" href="about-me.html">Login</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">My profile</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="container">
+
+      {{ include('partials/_flash.html.twig') }}
+
+      {% block body %}{% endblock %}
+      
+    </div>
+    
+  </body>
 </html>
