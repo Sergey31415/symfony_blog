@@ -21,8 +21,8 @@
       <tr>
         <th scope="row">{{post.id}}</th>
         <td>{{post.title}}</td>
-        <td>{{post.getUser().getName()}}</td>
-        <td>{{post.getCategory().getTitle()}}</td>
+        <td>{{post.getUserName()}}</td>
+        <td>{{post.getCategoryTitle()}}</td>
         <td>{{post.views}}</td>
         <td>
           <a href="{{path('admin_post_edit', {id: post.id})}}" class="btn btn-secondary btn-sm">edit</a>

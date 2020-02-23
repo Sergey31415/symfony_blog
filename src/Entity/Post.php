@@ -145,6 +145,13 @@ class Post
         return $this;
     }
 
+    public function getCategoryTitle(): ?string
+    {
+        return $this->getCategory()
+            ? $this->getCategory()->getTitle()
+            : 'no-category';
+    }
+
     public function getUser(): ?User
     {
         return $this->user;
@@ -155,5 +162,12 @@ class Post
         $this->user = $user;
 
         return $this;
+    }
+
+    public function getUserName(): ?string
+    {
+        return $this->getUser()
+            ? $this->getUser()->getName()
+            : 'no-author';
     }
 }
