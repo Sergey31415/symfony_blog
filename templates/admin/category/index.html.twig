@@ -20,7 +20,7 @@
       <td>
         <a href="{{path('admin_category_edit', {id: category.id})}}" class="btn btn-secondary btn-sm">edit</a>
         <a class="btn btn-sm py-0 px-0">
-        {{ include('admin/form/_delete_form.html.twig', {category: category}) }} </a>
+        {{ include('admin/form/_delete_form.html.twig', {action: path('admin_category_delete', {id: category.id}) }) }} </a>
       </td>
     </th>
     {% endfor %}

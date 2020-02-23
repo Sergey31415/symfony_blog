@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Post {% endblock %}
+
+{% block body %}
+  <a href="{{path('admin_post_new')}}" class="btn btn-primary my-4">Add new post</a>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">title</th>
+        <th scope="col">author</th>
+        <th scope="col">category</th>
+        <th scope="col">views</th>
+        <th scope="col">action</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      {% for post in posts %}
+      <tr>
+        <th scope="row">{{post.id}}</th>
+        <td>{{post.title}}</td>
+        <td>{{post.getUser().getName()}}</td>
+        <td>{{post.getCategory().getTitle()}}</td>
+        <td>{{post.views}}</td>
+        <td>
+          <a href="{{path('admin_post_edit', {id: post.id})}}" class="btn btn-secondary btn-sm">edit</a>
+          <a class="btn btn-sm py-0 px-0">
+          {{ include('admin/form/_delete_form.html.twig', {action: path('admin_post_delete', {id: post.id}) }) }} </a>
+          
+        </td>
+      </th>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
