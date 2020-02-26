@@ -102,6 +102,13 @@ class Post
         return $this->image;
     }
 
+    public function getImagePath()
+    {
+        return $this->getImage()
+            ? '/uploads/' . $this->getImage()
+            : '/build/images/no-image.png';
+    }
+
     public function setImage(?string $image): self
     {
         $this->image = $image;
@@ -164,7 +171,7 @@ class Post
         return $this;
     }
 
-    public function getUserName(): ?string
+    public function getAuthorName(): ?string
     {
         return $this->getUser()
             ? $this->getUser()->getName()

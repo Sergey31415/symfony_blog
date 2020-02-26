@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BlogController!{% endblock %}
+
+{% block body %}
+  <div class="d-flex flex-row flex-wrap justify-content-between px-20">
+
+    {% for post in posts %}
+      <article class="col-6 px-5 py-4 border">
+        <div class="">
+          <h3 class="text-center mb-4">{{post.title}}</h3>
+          <img src="{{asset(post.getImagePath())}}" width="100%" class="mb-3">
+          <p class="text-center">
+            <a href="#">{{post.getCategoryTitle()}}</a></p>
+          <p>{{post.description}}</p>
+          <cite class="text-muted">By 
+            <a href="#" class="text-reset"><u>{{post.getAuthorName()}}</u></a>, on 3 september</cite>
+          </div>
+      </article>
+    {% endfor %}
+
+  </div>
+{% endblock %}
