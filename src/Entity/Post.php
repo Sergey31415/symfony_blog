@@ -47,7 +47,7 @@ class Post
     private $views;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="category")
      */
     private $category;
 
@@ -152,11 +152,25 @@ class Post
         return $this;
     }
 
+    public function hasCategory()
+    {
+        return $this->category
+            ? true
+            : false;
+    }
+
     public function getCategoryTitle(): ?string
     {
-        return $this->getCategory()
-            ? $this->getCategory()->getTitle()
+        return $this->category
+            ? $this->category->getTitle()
             : 'no-category';
+    }
+
+    public function getCategoryId(): ?int
+    {
+        return $this->category
+            ? $this->category->getId()
+            : null;
     }
 
     public function getUser(): ?User

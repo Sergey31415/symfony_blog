@@ -46,4 +46,9 @@ class Category
 
         return $this;
     }
+
+    public function getPosts(): ?array
+    {
+        return $this->posts->toArray();
+    }
 }

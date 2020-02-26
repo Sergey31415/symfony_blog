@@ -11,7 +11,11 @@
           <h3 class="text-center mb-4">{{post.title}}</h3>
           <img src="{{asset(post.getImagePath())}}" width="100%" class="mb-3">
           <p class="text-center">
-            <a href="#">{{post.getCategoryTitle()}}</a></p>
+
+            {% if post.hasCategory() %}
+              <a href="{{path('category_posts', {id: post.getCategoryId()} )}}">{{post.getCategoryTitle()}}</a>
+            {% endif %}
+
           <p>{{post.description}}</p>
           <cite class="text-muted">By 
             <a href="#" class="text-reset"><u>{{post.getAuthorName()}}</u></a>, on 3 september</cite>

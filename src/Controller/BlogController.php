@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,5 +24,15 @@ class BlogController extends AbstractController
         $posts = $this->postRepository->findAll();
 
         return $this->render('blog/index.html.twig', ['posts' => $posts]);
+    }
+
+    /**
+     * @Route("/category/{id}", name="category_posts")
+     */
+    public function getCategoryPosts(Category $category)
+    {
+        $posts = $category->getPosts();
+        
+        return $this->render('/blog/index.html.twig', ['posts' => $posts]);
     }
 }
