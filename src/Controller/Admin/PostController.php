@@ -37,6 +37,16 @@ class PostController extends AbstractController
       $form->handleRequest($request);
 
         if($form->isSubmitted()) {
+
+          //upload image
+          $image = $form->get('image')->getData();
+          $filename = $image->getClientOriginalName();
+          $image->move(
+            $this->getParameter('post_images_directory'),
+            $filename
+          );
+          $post->setImage($filename);
+          
           $em = $this->getDoctrine()->getManager();
           $em->persist($post);
           $em->flush();

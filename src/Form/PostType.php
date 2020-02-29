@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Category;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 use App\Entity\Post;
 use Symfony\Component\Form\AbstractType;
@@ -19,7 +20,7 @@ class PostType extends AbstractType
             ->add('title')
             ->add('description')
             ->add('content')
-            ->add('image')
+            ->add('image', FileType::class, ['label' => 'Ulpload Image'])
             ->add('date')
             ->add('views')
             ->add('category', EntityType::class, [
