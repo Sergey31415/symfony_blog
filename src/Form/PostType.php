@@ -6,6 +6,7 @@ use App\Entity\Category;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\CallbackTransformer;
 
 use App\Entity\Post;
 use Symfony\Component\Form\AbstractType;
@@ -31,6 +32,17 @@ class PostType extends AbstractType
                 'class' => User::class,
                 'choice_label' => 'name'
             ])
+        ;
+
+        $builder->get('image')
+            ->addModelTransformer(new CallbackTransformer(
+                function($image) {
+                    return null;
+                },
+                function($image) {
+                    return $image;
+                }
+            ))
         ;
     }
 

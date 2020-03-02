@@ -38,14 +38,8 @@ class PostController extends AbstractController
 
         if($form->isSubmitted()) {
 
-          //upload image
           $image = $form->get('image')->getData();
-          $filename = $image->getClientOriginalName();
-          $image->move(
-            $this->getParameter('post_images_directory'),
-            $filename
-          );
-          $post->setImage($filename);
+          $this->uploadImage($image, $post);
           
           $em = $this->getDoctrine()->getManager();
           $em->persist($post);
@@ -60,9 +54,22 @@ class PostController extends AbstractController
     /**
      * @Route("/admin/post/{id}/edit", name="admin_post_edit")
      */
-    public function edit(Request $request)
+    public function edit(Request $request, Post $post)
     {
-      dd();
+      $form = $this->createForm(PostType::class, $post);
+      $form->handleRequest($request);
+
+      if($form->isSubmitted()) {
+        
+        $image = $form->get('image')->getData();
+        $this->uploadImage($image, $post);
+
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->redirectToRoute('admin_post');
+      }
+
+      return $this->render('admin/post/edit.html.twig', ['form' => $form->createView()]);
     }
 
     /**
@@ -82,4 +89,16 @@ class PostController extends AbstractController
       $this->addFlash('success', 'post has deleted');
       return $this->redirectToRoute('admin_post');
     }
+
+
+    private function uploadImage($image, $post) {
+      $filename = uniqid() . '-' . $image->getClientOriginalName();
+      $image->move(
+        $this->getParameter('post_images_directory'),
+        $filename
+      );
+
+      $post->setImage($filename);
+    }
+
 }
