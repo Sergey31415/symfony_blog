@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Post;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,7 +42,7 @@ class Comment
         return $this->user;
     }
 
-    public function setUser(string $user): self
+    public function setUser(?User $user): self
     {
         $this->user = $user;
 
@@ -53,7 +54,7 @@ class Comment
         return $this->post;
     }
 
-    public function setPost(string $post): self
+    public function setPost(?Post $post): self
     {
         $this->post = $post;
 

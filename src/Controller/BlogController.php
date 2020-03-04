@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Post;
+use App\Entity\Comment;
 use App\Entity\Category;
+use App\Form\CommentType;
 use App\Repository\PostRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -41,7 +43,29 @@ class BlogController extends AbstractController
      */
     public function commentNew(Request $request, Post $post)
     {
+       $comment = new Comment;
+       $comment->setUser($this->getUser());
+       $comment->setPost($post);
 
+       $form = $this->createForm(CommentType::class, $comment);
+       $form->handleRequest($request);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($comment);
+        $em->flush();
+
+        return $this->redirectToRoute('post_show', ['id' => $post->getId()]);
+    }
+
+    // this controller called directly via the 'blog/post_show.html.twig' template
+    public function commentForm(Post $post)
+    {
+        $form = $this->createForm(CommentType::class);
+
+        return $this->render('blog/_comment_form.html.twig', [
+            'form' => $form->createView(),
+            'post' => $post
+        ]);
     }
 
     /**

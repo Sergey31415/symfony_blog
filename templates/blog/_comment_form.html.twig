@@ -1,0 +1,8 @@
+ {% if app.user %}
+  <div class="leave-comment mb-4">
+    {{ form_start(form, {method: 'POST', action: path('comment_new', {'id': post.id}) }) }}
+      {{ form_row(form.content) }}  
+      <button class="btn btn-primary">Leave comment</button> 
+    {{ form_end(form) }}
+  </div>
+{% endif %}

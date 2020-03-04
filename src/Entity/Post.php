@@ -56,6 +56,11 @@ class Post
      */
     private $user;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="post")
+     */
+    private $comments;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -190,5 +195,10 @@ class Post
         return $this->getUser()
             ? $this->getUser()->getName()
             : 'no-author';
+    }
+
+    public function getComments()
+    {
+        return $this->comments;
     }
 }
