@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Post show {% endblock %}
+
+{% block body %}
+  <article class="col-12 px-5 py-4 mb-5 border">
+        <div class="">
+          <h3 class="text-center mb-4">{{post.title}}</h3>
+          <img src="{{asset(post.getImagePath())}}" width="100%" class="mb-3">
+          <p class="text-center">
+
+            {% if post.hasCategory() %}
+              <a href="{{path('category_posts', {id: post.getCategoryId()} )}}">{{post.getCategoryTitle()}}</a>
+            {% endif %}
+
+          <p>{{post.content}}</p>
+          <cite class="text-muted">By 
+            <a href="#" class="text-reset"><u>{{post.getAuthorName()}}</u></a>, on 3 september</cite>
+          </div>
+      </article>
+
+      <div class="leave-comment mb-4">
+        <form action="{{path('comment_new', {id: post.id})}}">
+          <textarea rows="7" cols="100" name="content"></textarea>
+          <button class="d-block">Leave comment</button>
+        </form>
+      </div>
+
+      <div class="comments">
+
+        <ul class="list-group">
+          <li class="list-group-item col-6 mb-5">
+              <div class="d-flex align-items-end mb-4">
+                <img src="{{asset('build/images/no-user.png')}}" width="50" height="50">
+                <h5 class="m-0 ml-4">Author name</h5>
+              </div>
+              <p></p>
+          </li>
+
+      </div>
+{% endblock %}
+
