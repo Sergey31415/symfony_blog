@@ -26,7 +26,7 @@
             <li class="nav-item"><a class="nav-link" href="{{path('app_login')}}">Login</a></li>
           {% endif %}
           {% if app.user %}
-            <li class="nav-item"><a class="nav-link" href="contact.html">My profile</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{path('profile')}}">My profile</a></li>
             <li class="nav-item"><a class="nav-link" href="{{path('app_logout')}}">Logout</a></li>
           {% endif %}
         </ul>
